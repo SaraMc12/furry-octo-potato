@@ -9,12 +9,17 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import Screen from "./app/components/Screen";
+import ListItem from "./app/components/ListItem";
 import Icon from "./app/components/Icon";
 
 export default function App() {
   return (
     <Screen>
-      <Icon name="email" size={50} backgroundColor="red" iconColor="white" />
+      <ListItem
+        title="email"
+        // subTitle="farts"
+        IconComponent={<Icon name="email" />}
+      />
     </Screen>
   );
 }
