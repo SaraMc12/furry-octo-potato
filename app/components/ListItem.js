@@ -6,27 +6,27 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import AppText from "./AppText";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
+import Icon from "./Icon";
 import colors from "../config/colors";
 
 function ListItem({
   title,
   subTitle,
   image,
+  IconComponent,
   onPress,
   renderRightActions,
-  IconComponent,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight underlayColor={colors.light} onPress={() => onPress}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={styles.container}>
-          {/* wrapping components and adding && conditionally renders it to ListItem if there is one */}
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
-          <View style={styles.contentContainer}>
+          <View style={styles.infoContainer}>
             <AppText style={styles.title}>{title}</AppText>
             {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
           </View>
@@ -40,8 +40,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 15,
+    backgroundColor: colors.white,
   },
-  contentContainer: {
+  infoContainer: {
     marginLeft: 10,
     justifyContent: "center",
   },
@@ -51,13 +52,10 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   subTitle: {
-    fontSize: 15,
     color: colors.black,
   },
   title: {
-    fontSize: 15,
-    fontWeight: "500",
-    color: colors.black,
+    fontWeight: "bold",
   },
 });
 

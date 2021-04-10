@@ -13,13 +13,5 @@ import ListItem from "./app/components/ListItem";
 import Icon from "./app/components/Icon";
 
 export default function App() {
-  return (
-    <Screen>
-      <ListItem
-        title="email"
-        // subTitle="farts"
-        IconComponent={<Icon name="email" />}
-      />
-    </Screen>
-  );
+  return <AccountScreen />;
 }

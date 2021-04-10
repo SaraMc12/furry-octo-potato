@@ -1,38 +1,70 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList } from "react-native";
 import ListItem from "../components/ListItem";
 
+import Icon from "../components/Icon";
+import Screen from "../components/Screen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ItemSeparator from "../components/ItemSeparator";
 import colors from "../config/colors";
-import { FlatList } from "react-native-gesture-handler";
 
-// step one - create a list item in its own container
-// then apply a margin to create some space
-// step 2 -createa flatlist with two list items that is insside its own container with margine below it
-// step 3- create a single list item
-
-// create resuable Icon component as well, thats the circle for the icon.
-
+const accountMenuItems = [
+  {
+    title: "Listings",
+    icon: {
+      name: "format-list-bulleted",
+      backgroundColor: colors.primary,
+    },
+  },
+  {
+    title: "Messages",
+    icon: {
+      name: "email",
+      backgroundColor: colors.secondary,
+    },
+  },
+];
 function AccountScreen(props) {
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>
+    <Screen style={styles.screen}>
+      <View style={styles.container}>
         <ListItem
           image={require("../assets/banana.jpg")}
           title="Potato Wolf"
           subTitle="PotatoWolf@gmail.com"
         />
       </View>
-    </View>
+      <View style={styles.container}>
+        <FlatList
+          data={accountMenuItems}
+          keyExtractor={(accountMenuItem) => accountMenuItem.title}
+          ItemSeparatorComponent={ItemSeparator}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.title}
+              IconComponent={
+                <Icon
+                  name={item.icon.name}
+                  backgroundColor={item.icon.backgroundColor}
+                />
+              }
+            />
+          )}
+        />
+      </View>
+      <View style={styles.container}>
+        <ListItem
+          title="Log Out"
+          IconComponent={<Icon name="logout" backgroundColor="#b0c6b9" />}
+        />
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    // padding: 15,
-    backgroundColor: colors.primary,
+    marginVertical: 20,
   },
   list: {
     flexDirection: "row",
@@ -40,6 +72,9 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: colors.white,
     marginBottom: 10,
+  },
+  screen: {
+    backgroundColor: colors.light,
   },
 });
 export default AccountScreen;
